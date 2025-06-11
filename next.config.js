@@ -1,12 +1,32 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "standalone",
+  // Image configuration for placeholder images
   images: {
-    domains: ["placeholder.svg"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
     unoptimized: true,
   },
-  experimental: {
-    serverComponentsExternalPackages: [],
+
+  // Enable SWC minification for better performance
+  swcMinify: true,
+
+  // Optimize for Telegram Mini Apps
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN",
+          },
+        ],
+      },
+    ];
   },
 };
 

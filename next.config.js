@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Image configuration for placeholder images
+  // Image configuration
   images: {
     remotePatterns: [
       {
@@ -11,10 +11,7 @@ const nextConfig = {
     unoptimized: true,
   },
 
-  // Enable SWC minification for better performance
-  swcMinify: true,
-
-  // Optimize for Telegram Mini Apps
+  // Headers for Telegram Mini App
   async headers() {
     return [
       {
@@ -22,7 +19,7 @@ const nextConfig = {
         headers: [
           {
             key: "X-Frame-Options",
-            value: "SAMEORIGIN",
+            value: "ALLOW-FROM https://telegram.org/",
           },
         ],
       },
